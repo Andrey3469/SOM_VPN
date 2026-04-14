@@ -16,10 +16,15 @@ ADMIN_ID = 5195664540
 WALLET_NUMBER = '410119498554165'
 CHANNEL_ID = '@SOM_VPN69'
 
-# ПАРАМЕТРЫ ДЛЯ ПРОВЕРКИ
-REQUIRED_BOT_USERNAME = 'Excellentbot_bot'
-REQUIRED_START_CODE = '01363756824'
-REFERRAL_LINK = f"https://t.me/{REQUIRED_BOT_USERNAME}?start={REQUIRED_START_CODE}"
+# ПЕРВЫЙ БОТ (ipcorp_bot)
+BOT1_USERNAME = 'ipcorp_bot'
+BOT1_START_CODE = 'r01363756824'
+BOT1_LINK = f"https://t.me/{BOT1_USERNAME}?start={BOT1_START_CODE}"
+
+# ВТОРОЙ БОТ (Excellentbot_bot)
+BOT2_USERNAME = 'Excellentbot_bot'
+BOT2_START_CODE = '01363756824'
+BOT2_LINK = f"https://t.me/{BOT2_USERNAME}?start={BOT2_START_CODE}"
 
 # VPN-ключи
 VPN_KEYS = """vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.191.246:555?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=pF1OwseXc7K9qhmUt0uLv7kjM0Lp8X4WKIvZQemePXM&sid=def112&spiderX=%2FavoaKWnQIasasdrasdfUvi#Som%20%D0%BE%D0%B1%D1%85%D0%BE%D0%B4 
@@ -75,7 +80,7 @@ def save_promos():
 load_data()
 load_promos()
 
-# ============ ПРОВЕРКА ДОСТУПА ============
+# ============ ПРОВЕРКА ДОСТУПА (ОБА БОТА) ============
 def has_access(user_id):
     user_data = user_payments.get(str(user_id), {})
     return user_data.get('has_access', False)
@@ -83,27 +88,45 @@ def has_access(user_id):
 def grant_access(user_id):
     user_data = user_payments.get(str(user_id), {})
     user_data['has_access'] = True
-    if 'has_valid_referral' not in user_data:
-        user_data['has_valid_referral'] = True
+    user_payments[str(user_id)] = user_data
+    save_data()
+
+def check_bot1_access(user_id):
+    user_data = user_payments.get(str(user_id), {})
+    return user_data.get('bot1_accessed', False)
+
+def check_bot2_access(user_id):
+    user_data = user_payments.get(str(user_id), {})
+    return user_data.get('bot2_accessed', False)
+
+def set_bot1_access(user_id):
+    user_data = user_payments.get(str(user_id), {})
+    user_data['bot1_accessed'] = True
+    user_payments[str(user_id)] = user_data
+    save_data()
+
+def set_bot2_access(user_id):
+    user_data = user_payments.get(str(user_id), {})
+    user_data['bot2_accessed'] = True
     user_payments[str(user_id)] = user_data
     save_data()
 
 def send_access_required(chat_id):
-    markup = types.InlineKeyboardMarkup()
-    btn_go = types.InlineKeyboardButton('🚀 ПЕРЕЙТИ ПО ССЫЛКЕ', url=REFERRAL_LINK)
+    markup = types.InlineKeyboardMarkup(row_width=1)
+    btn_bot1 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В ipcorp_bot', url=BOT1_LINK)
+    btn_bot2 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В Excellentbot_bot', url=BOT2_LINK)
     btn_help = types.InlineKeyboardButton('❓ ПОЛУЧИТЬ ДОСТУП', callback_data='how_to_get_access')
     btn_check = types.InlineKeyboardButton('✅ ПРОВЕРИТЬ ДОСТУП', callback_data='check_access')
-    markup.add(btn_go)
-    markup.add(btn_help)
-    markup.add(btn_check)
+    markup.add(btn_bot1, btn_bot2, btn_help, btn_check)
 
     bot.send_message(
         chat_id,
-        f"🔒 ДЛЯ ДОСТУПА К БОТУ НЕОБХОДИМО ПОДТВЕРЖДЕНИЕ!\n\n"
-        f"👉 Ссылка: {REFERRAL_LINK}\n\n"
+        f"🔒 ДЛЯ ДОСТУПА К БОТУ НЕОБХОДИМО ПЕРЕЙТИ В ОБА БОТА!\n\n"
+        f"🤖 Бот 1: {BOT1_LINK}\n"
+        f"🤖 Бот 2: {BOT2_LINK}\n\n"
         f"📌 Инструкция:\n"
-        f"1️⃣ Нажмите на кнопку ниже\n"
-        f"2️⃣ Нажмите «Запустить» / «Open»\n"
+        f"1️⃣ Нажмите на кнопки ниже\n"
+        f"2️⃣ В каждом боте нажмите «Запустить» / «Open»\n"
         f"3️⃣ Вернитесь сюда и нажмите «ПРОВЕРИТЬ ДОСТУП»\n\n"
         f"⭐ Если не работает — обратитесь к администратору: @SOM_VPN69\n\n"
         f"Доступ может быть выдан вручную после обращения.",
@@ -201,34 +224,51 @@ def send_main_menu(chat_id):
 def start(message):
     user_id = message.chat.id
     
+    # Обработка параметров start для обоих ботов
     payload = message.text.split()
     if len(payload) > 1:
         start_param = payload[1]
-        if start_param == REQUIRED_START_CODE:
-            grant_access(user_id)
-            bot.reply_to(message, "✅ Отлично! Вы перешли по правильной ссылке. Доступ к боту открыт!")
+        if start_param == BOT1_START_CODE:
+            set_bot1_access(user_id)
+            bot.reply_to(message, "✅ Отлично! Вы перешли по ссылке ipcorp_bot.")
+        elif start_param == BOT2_START_CODE:
+            set_bot2_access(user_id)
+            bot.reply_to(message, "✅ Отлично! Вы перешли по ссылке Excellentbot_bot.")
+    
+    # Проверяем, выполнены ли оба условия
+    if check_bot1_access(user_id) and check_bot2_access(user_id):
+        grant_access(user_id)
+        bot.reply_to(message, "🎉 Поздравляем! Вы выполнили все условия. Доступ к боту открыт!")
     
     send_main_menu(user_id)
 
-# ============ ОБРАБОТЧИКИ ПРОВЕРОК ============
+# ============ ОБРАБОТЧИК ПРОВЕРКИ ДОСТУПА ============
 @bot.callback_query_handler(func=lambda call: call.data == 'check_access')
 def check_access_callback(call):
     user_id = call.from_user.id
-    if has_access(user_id):
+    
+    bot1_ok = check_bot1_access(user_id)
+    bot2_ok = check_bot2_access(user_id)
+    
+    if bot1_ok and bot2_ok:
+        grant_access(user_id)
         bot.edit_message_text(
-            "✅ Доступ подтверждён!",
+            "✅ Доступ подтверждён! Вы перешли в оба бота.",
             chat_id=call.message.chat.id,
             message_id=call.message.message_id
         )
         send_main_menu(user_id)
         bot.answer_callback_query(call.id, "✅ Доступ разрешён!")
     else:
+        missing = []
+        if not bot1_ok:
+            missing.append("ipcorp_bot")
+        if not bot2_ok:
+            missing.append("Excellentbot_bot")
+        
         bot.answer_callback_query(
             call.id,
-            "❌ Доступ ещё не выдан.\n\n"
-            "Варианты получения доступа:\n"
-            "1. Перейдите по ссылке выше и нажмите «Запустить»\n"
-            "2. Напишите администратору @SOM_VPN69 и сообщите свой ID",
+            f"❌ Вы ещё не перешли в: {', '.join(missing)}\n\nПерейдите по ссылкам и нажмите «Запустить».",
             show_alert=True
         )
 
@@ -256,7 +296,7 @@ def check_subscription_callback(call):
             show_alert=True
         )
 
-# ============ КОМАНДЫ АДМИНИСТРАТОРА ============
+# ============ КОМАНДЫ АДМИНИСТРАТОРА (ОСТАЛЬНЫЕ) ============
 @bot.message_handler(commands=['createpromo'])
 def create_promo(message):
     if message.chat.id != ADMIN_ID:
@@ -362,6 +402,8 @@ def user_info(message):
     text += f"Тариф: {data.get('type', '?')}\n"
     text += f"Статус: {'Активна' if data.get('paid') else 'Не активна'}\n"
     text += f"Доступ к боту: {'✅ Да' if data.get('has_access') else '❌ Нет'}\n"
+    text += f"Переход в ipcorp_bot: {'✅' if data.get('bot1_accessed') else '❌'}\n"
+    text += f"Переход в Excellentbot_bot: {'✅' if data.get('bot2_accessed') else '❌'}\n"
     if data.get('expires_at'):
         expires_str = datetime.fromtimestamp(data['expires_at']).strftime('%d.%m.%Y %H:%M')
         text += f"Подписка до: {expires_str}"
@@ -393,7 +435,9 @@ def give_subscription(message):
         'paid': True,
         'expires_at': expires_at,
         'admin_given': True,
-        'has_access': True
+        'has_access': True,
+        'bot1_accessed': True,
+        'bot2_accessed': True
     }
     save_data()
     
@@ -562,6 +606,8 @@ def show_stats(message):
     total_users = len(user_payments)
     active_users = 0
     has_access_count = 0
+    bot1_count = 0
+    bot2_count = 0
     
     for user_id, data in user_payments.items():
         if data.get('paid', False):
@@ -570,11 +616,17 @@ def show_stats(message):
                 active_users += 1
         if data.get('has_access', False):
             has_access_count += 1
+        if data.get('bot1_accessed', False):
+            bot1_count += 1
+        if data.get('bot2_accessed', False):
+            bot2_count += 1
     
     text = f"📊 СТАТИСТИКА:\n\n"
     text += f"👥 Всего: {total_users}\n"
     text += f"✅ Активных подписок: {active_users}\n"
     text += f"🔓 Имеют доступ: {has_access_count}\n"
+    text += f"🤖 Перешли в ipcorp_bot: {bot1_count}\n"
+    text += f"🤖 Перешли в Excellentbot_bot: {bot2_count}\n"
     text += f"🎫 Промокодов: {len(promocodes)}\n"
     text += f"💳 Кошелек: {WALLET_NUMBER}"
     bot.reply_to(message, text)
@@ -713,7 +765,7 @@ def activate_promo(message):
 def get_id(message):
     bot.reply_to(message, f"Ваш ID: {message.chat.id}")
 
-# ============ ОБРАБОТЧИКИ КНОПОК ============
+# ============ ОБРАБОТЧИКИ КНОПОК ПОКУПКИ ============
 @bot.callback_query_handler(func=lambda call: call.data == 'buy')
 def handle_buy(call):
     if not has_access(call.from_user.id):
@@ -896,11 +948,11 @@ def handle_other(call):
     
     bot.send_message(call.message.chat.id, text)
 
-# ============ ЗАПУСК С ПЕРЕЗАПУСКОМ ============
+# ============ ЗАПУСК ============
 def run_bot():
     while True:
         try:
-            print("✅ VPN-бот с ручной выдачей доступа запущен!")
+            print("✅ VPN-бот с проверкой перехода в 2 бота запущен!")
             bot.infinity_polling(timeout=60, long_polling_timeout=60)
         except Exception as e:
             print(f"❌ Ошибка: {e}")
