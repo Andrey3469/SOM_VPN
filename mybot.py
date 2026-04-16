@@ -128,7 +128,7 @@ def send_access_required(chat_id):
         f"1️⃣ Нажмите на кнопки ниже\n"
         f"2️⃣ В каждом боте нажмите «Запустить» / «Open»\n"
         f"3️⃣ Вернитесь сюда и нажмите «ПРОВЕРИТЬ ДОСТУП»\n\n"
-        f"⭐ Если не работает — обратитесь к администратору: @SOM_VPN69\n\n"
+        f"⭐ Если не работает — обратитесь к администратору: @mmmmm5279\n\n"
         f"Доступ может быть выдан вручную после обращения.",
         reply_markup=markup
     )
@@ -137,7 +137,7 @@ def send_access_required(chat_id):
 def how_to_get_access_callback(call):
     bot.answer_callback_query(
         call.id, 
-        "Напишите администратору @SOM_VPN69 и сообщите свой ID. Администратор выдаст доступ командой /grant",
+        "Напишите администратору @mmmmm5279 и сообщите свой ID. Администратор выдаст доступ командой /grant",
         show_alert=True
     )
 
@@ -768,10 +768,7 @@ def get_id(message):
 # ============ ОБРАБОТЧИКИ КНОПОК ПОКУПКИ ============
 @bot.callback_query_handler(func=lambda call: call.data == 'buy')
 def handle_buy(call):
-    if not has_access(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ к боту!", show_alert=True)
-        send_access_required(call.message.chat.id)
-        return
+    # Убираем проверку has_access для кнопки покупки
     if not check_subscription(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
         send_subscription_required(call.message.chat.id)
@@ -789,9 +786,7 @@ def handle_buy(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == 'forever')
 def handle_forever(call):
-    if not has_access(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
-        return
+    # Убираем проверку has_access для выбора тарифа
     if not check_subscription(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
         return
@@ -833,9 +828,7 @@ def handle_forever(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == 'month')
 def handle_month(call):
-    if not has_access(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
-        return
+    # Убираем проверку has_access для выбора тарифа
     if not check_subscription(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
         return
@@ -875,11 +868,10 @@ def handle_month(call):
     except:
         pass
 
+# ============ ОБРАБОТЧИК КНОПКИ "Я ОПЛАТИЛ" (БЕЗ ПРОВЕРКИ ДОСТУПА) ============
 @bot.callback_query_handler(func=lambda call: call.data.startswith('check_'))
 def handle_check(call):
-    if not has_access(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
-        return
+    # ⚠️ УБИРАЕМ ПРОВЕРКУ has_access - оплата доступна всем!
     if not check_subscription(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
         return
@@ -888,17 +880,17 @@ def handle_check(call):
     user_id = call.from_user.id
     
     if str(user_id) not in user_payments:
-        bot.answer_callback_query(call.id, "❌ Ошибка")
+        bot.answer_callback_query(call.id, "❌ Ошибка. Попробуйте выбрать подписку заново.")
         return
     
     if user_payments[str(user_id)].get('paid', False):
-        bot.answer_callback_query(call.id, "✅ Уже подтверждено")
+        bot.answer_callback_query(call.id, "✅ Оплата уже подтверждена!")
         return
     
     payment_data = user_payments[str(user_id)]
     bot.send_message(ADMIN_ID, f"🔔 ПЛАТЁЖ!\n👤 {user_id}\n💰 {payment_data['amount']}₽\n✅ /approve {user_id} 30\n❌ /reject {user_id}")
-    bot.answer_callback_query(call.id, "✅ Заявка отправлена!")
-    bot.send_message(user_id, "📩 Заявка отправлена администратору")
+    bot.answer_callback_query(call.id, "✅ Заявка отправлена администратору!")
+    bot.send_message(user_id, "📩 Заявка отправлена администратору. Ожидайте подтверждения.")
 
 @bot.callback_query_handler(func=lambda call: call.data == 'promo')
 def handle_promo_button(call):
@@ -942,7 +934,7 @@ def handle_other(call):
         else:
             text = "❌ Нет активной подписки"
     elif call.data == 'support':
-        text = "🆘 Поддержка: @SOM_VPN69"
+        text = "🆘 Поддержка: @mmmmm5279"
     else:
         text = "📖 Happ → + → Импорт"
     
