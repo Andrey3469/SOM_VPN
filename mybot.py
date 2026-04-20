@@ -99,6 +99,24 @@ def grant_access(user_id):
     user_payments[str(user_id)] = user_data
     save_data()
 
+def block_user(user_id):
+    """Отзывает доступ у пользователя"""
+    user_id_str = str(user_id)
+    if user_id_str in user_payments:
+        user_payments[user_id_str]['has_access'] = False
+        save_data()
+        return True
+    return False
+
+def unblock_user(user_id):
+    """Восстанавливает доступ пользователя"""
+    user_id_str = str(user_id)
+    if user_id_str in user_payments:
+        user_payments[user_id_str]['has_access'] = True
+        save_data()
+        return True
+    return False
+
 # ============ ОТПРАВКА УВЕДОМЛЕНИЯ АДМИНУ ============
 def send_access_request_to_admin(user_id, username):
     admin_text = f"""🔔 **НОВЫЙ ЗАПРОС НА ДОСТУП!**
@@ -113,14 +131,14 @@ def send_access_request_to_admin(user_id, username):
 2. Если да — выдайте доступ командой:
    `/grant {user_id}`
 
-❌ Если нет — попросите перейти по ссылкам и нажать «ПРОВЕРИТЬ ДОСТУП» снова."""
+❌ Если нет — попросите перейти по ссылкам и нажать «ПОЛУЧИТЬ ДОСТУП» снова."""
     
     try:
         bot.send_message(ADMIN_ID, admin_text, parse_mode='Markdown')
     except Exception as e:
         print(f"Ошибка отправки уведомления админу: {e}")
 
-# ============ КОМАНДА АДМИНИСТРАТОРА ============
+# ============ КОМАНДЫ АДМИНИСТРАТОРА ============
 @bot.message_handler(commands=['grant'])
 def grant_access_command(message):
     if message.chat.id != ADMIN_ID:
@@ -150,117 +168,50 @@ def grant_access_command(message):
     except Exception as e:
         bot.reply_to(message, f"❌ Ошибка: {e}")
 
-# ============ ПРОВЕРКА ПОДПИСКИ НА КАНАЛ ============
-def check_subscription(user_id):
-    try:
-        member = bot.get_chat_member(CHANNEL_ID, user_id)
-        if member.status in ['member', 'administrator', 'creator']:
-            return True
-        return False
-    except Exception as e:
-        print(f"Ошибка проверки подписки на канал: {e}")
-        return False
-
-def send_subscription_required(chat_id):
-    markup = types.InlineKeyboardMarkup()
-    btn_channel = types.InlineKeyboardButton('📢 ПОДПИСАТЬСЯ НА КАНАЛ', url='https://t.me/SOM_VPN69')
-    btn_check = types.InlineKeyboardButton('✅ ПРОВЕРИТЬ ПОДПИСКУ', callback_data='check_sub')
-    markup.add(btn_channel)
-    markup.add(btn_check)
-    
-    bot.send_message(
-        chat_id,
-        f"🔒 ДЛЯ ИСПОЛЬЗОВАНИЯ БОТА НЕОБХОДИМА ПОДПИСКА НА КАНАЛ!\n\n"
-        f"👉 Канал: https://t.me/SOM_VPN69\n\n"
-        f"📌 Инструкция:\n"
-        f"1️⃣ Нажмите на кнопку ниже\n"
-        f"2️⃣ Подпишитесь на канал\n"
-        f"3️⃣ Вернитесь и нажмите «ПРОВЕРИТЬ ПОДПИСКУ»\n\n"
-        f"⭐ После подписки вам откроется доступ к боту!",
-        reply_markup=markup
-    )
-
-# ============ ГЛАВНОЕ МЕНЮ ============
-def send_main_menu(chat_id):
-    if has_access(chat_id):
-        markup = types.InlineKeyboardMarkup(row_width=2)
-        btn1 = types.InlineKeyboardButton('💰 Купить подписку', callback_data='buy')
-        btn2 = types.InlineKeyboardButton('📋 Моя подписка', callback_data='my_sub')
-        btn3 = types.InlineKeyboardButton('🆘 Тех.Поддержка', callback_data='support')
-        btn4 = types.InlineKeyboardButton('📖 Инструкция', callback_data='manual')
-        btn5 = types.InlineKeyboardButton('🎫 Промокод', callback_data='promo')
-        markup.add(btn1, btn2, btn3, btn4, btn5)
-        bot.send_message(chat_id, "🏆 Добро пожаловать в VPN-бот!\nВыберите действие:", reply_markup=markup)
+@bot.message_handler(commands=['block'])
+def block_command(message):
+    if message.chat.id != ADMIN_ID:
+        bot.reply_to(message, "❌ Нет доступа")
         return
     
-    # Если доступа нет — показываем сообщение с кнопкой "ПОЛУЧИТЬ ДОСТУП"
-    markup = types.InlineKeyboardMarkup()
-    btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
-    markup.add(btn_get_access)
-    
-    bot.send_message(
-        chat_id,
-        f"🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
-        f"Для получения доступа необходимо:\n"
-        f"1️⃣ Перейти по ссылкам ниже\n"
-        f"2️⃣ Нажать «Запустить» в каждом боте\n"
-        f"3️⃣ Нажать кнопку «ПОЛУЧИТЬ ДОСТУП»\n\n"
-        f"📌 Ссылки:\n"
-        f"• {BOT1_LINK}\n"
-        f"• {BOT2_LINK}\n\n"
-        f"После этого администратор проверит ваш запрос и выдаст доступ.",
-        parse_mode='Markdown',
-        reply_markup=markup
-    )
-
-@bot.message_handler(commands=['start'])
-def start(message):
-    send_main_menu(message.chat.id)
-
-# ============ ОБРАБОТЧИК КНОПКИ "ПОЛУЧИТЬ ДОСТУП" ============
-@bot.callback_query_handler(func=lambda call: call.data == 'request_access')
-def request_access_callback(call):
-    user_id = call.from_user.id
-    username = call.from_user.username
-    
-    # Отправляем уведомление администратору
-    send_access_request_to_admin(user_id, username)
-    
-    # Отвечаем пользователю
-    bot.answer_callback_query(call.id, "✅ Запрос отправлен администратору! Ожидайте.")
-    bot.send_message(
-        user_id,
-        "📩 Ваш запрос на доступ отправлен администратору.\n"
-        "Ожидайте подтверждения. Обычно это занимает до 10 минут.\n\n"
-        "После получения доступа нажмите /start снова."
-    )
-
-# ============ ОБРАБОТЧИК ПРОВЕРКИ ПОДПИСКИ НА КАНАЛ ============
-@bot.callback_query_handler(func=lambda call: call.data == 'check_sub')
-def check_subscription_callback(call):
-    user_id = call.from_user.id
-    
-    if not has_access(user_id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ к боту!", show_alert=True)
-        send_main_menu(user_id)
+    parts = message.text.split()
+    if len(parts) < 2:
+        bot.reply_to(message, "❌ Использование: /block USER_ID\n\nПример: /block 5195664540")
         return
-
-    if check_subscription(user_id):
-        bot.edit_message_text(
-            "✅ Подписка на канал подтверждена!\n\n🏆 Добро пожаловать в VPN-бот!",
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id
-        )
-        send_main_menu(user_id)
-        bot.answer_callback_query(call.id, "✅ Подписка подтверждена!")
+    
+    user_id = parts[1]
+    
+    if block_user(user_id):
+        bot.reply_to(message, f"✅ Доступ пользователя {user_id} отозван")
+        try:
+            bot.send_message(int(user_id), "🚫 Ваш доступ к боту отозван администратором.")
+        except:
+            pass
     else:
-        bot.answer_callback_query(
-            call.id, 
-            "❌ Вы ещё не подписались на канал!\nПодпишитесь и нажмите кнопку снова.",
-            show_alert=True
-        )
+        bot.reply_to(message, f"❌ Пользователь {user_id} не найден в базе")
 
-# ============ КОМАНДЫ АДМИНИСТРАТОРА (ОСТАЛЬНЫЕ) ============
+@bot.message_handler(commands=['unblock'])
+def unblock_command(message):
+    if message.chat.id != ADMIN_ID:
+        bot.reply_to(message, "❌ Нет доступа")
+        return
+    
+    parts = message.text.split()
+    if len(parts) < 2:
+        bot.reply_to(message, "❌ Использование: /unblock USER_ID\n\nПример: /unblock 5195664540")
+        return
+    
+    user_id = parts[1]
+    
+    if unblock_user(user_id):
+        bot.reply_to(message, f"✅ Доступ пользователя {user_id} восстановлен")
+        try:
+            bot.send_message(int(user_id), "✅ Ваш доступ к боту восстановлен! Нажмите /start")
+        except:
+            pass
+    else:
+        bot.reply_to(message, f"❌ Пользователь {user_id} не найден в базе")
+
 @bot.message_handler(commands=['createpromo'])
 def create_promo(message):
     if message.chat.id != ADMIN_ID:
@@ -364,7 +315,7 @@ def user_info(message):
     data = user_payments[user_id]
     text = f"📊 ПОЛЬЗОВАТЕЛЬ {user_id}:\n"
     text += f"Тариф: {data.get('type', '?')}\n"
-    text += f"Статус: {'Активна' if data.get('paid') else 'Не активна'}\n"
+    text += f"Статус подписки: {'Активна' if data.get('paid') else 'Не активна'}\n"
     text += f"Доступ к боту: {'✅ Да' if data.get('has_access') else '❌ Нет'}\n"
     if data.get('expires_at'):
         expires_str = datetime.fromtimestamp(data['expires_at']).strftime('%d.%m.%Y %H:%M')
@@ -639,6 +590,8 @@ def admin_help(message):
 
 📌 Доступ:
 /grant USER_ID - выдать доступ к боту
+/block USER_ID - отозвать доступ
+/unblock USER_ID - восстановить доступ
 
 📌 Промокоды:
 /createpromo - создать
@@ -712,6 +665,121 @@ def activate_promo(message):
 @bot.message_handler(commands=['getid'])
 def get_id(message):
     bot.reply_to(message, f"Ваш ID: {message.chat.id}")
+
+# ============ ПРОВЕРКА ПОДПИСКИ НА КАНАЛ ============
+def check_subscription(user_id):
+    try:
+        member = bot.get_chat_member(CHANNEL_ID, user_id)
+        if member.status in ['member', 'administrator', 'creator']:
+            return True
+        return False
+    except Exception as e:
+        print(f"Ошибка проверки подписки на канал: {e}")
+        return False
+
+def send_subscription_required(chat_id):
+    markup = types.InlineKeyboardMarkup()
+    btn_channel = types.InlineKeyboardButton('📢 ПОДПИСАТЬСЯ НА КАНАЛ', url='https://t.me/SOM_VPN69')
+    btn_check = types.InlineKeyboardButton('✅ ПРОВЕРИТЬ ПОДПИСКУ', callback_data='check_sub')
+    markup.add(btn_channel)
+    markup.add(btn_check)
+    
+    bot.send_message(
+        chat_id,
+        f"🔒 ДЛЯ ИСПОЛЬЗОВАНИЯ БОТА НЕОБХОДИМА ПОДПИСКА НА КАНАЛ!\n\n"
+        f"👉 Канал: https://t.me/SOM_VPN69\n\n"
+        f"📌 Инструкция:\n"
+        f"1️⃣ Нажмите на кнопку ниже\n"
+        f"2️⃣ Подпишитесь на канал\n"
+        f"3️⃣ Вернитесь и нажмите «ПРОВЕРИТЬ ПОДПИСКУ»\n\n"
+        f"⭐ После подписки вам откроется доступ к боту!",
+        reply_markup=markup
+    )
+
+# ============ ГЛАВНОЕ МЕНЮ ============
+def send_main_menu(chat_id):
+    if not has_access(chat_id):
+        # Если нет доступа — показываем сообщение с кнопкой "ПОЛУЧИТЬ ДОСТУП"
+        markup = types.InlineKeyboardMarkup()
+        btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
+        markup.add(btn_get_access)
+        
+        bot.send_message(
+            chat_id,
+            f"🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
+            f"Для получения доступа необходимо:\n"
+            f"1️⃣ Перейти по ссылкам ниже\n"
+            f"2️⃣ Нажать «Запустить» в каждом боте\n"
+            f"3️⃣ Нажать кнопку «ПОЛУЧИТЬ ДОСТУП»\n\n"
+            f"📌 Ссылки:\n"
+            f"• {BOT1_LINK}\n"
+            f"• {BOT2_LINK}\n\n"
+            f"После этого администратор проверит ваш запрос и выдаст доступ.",
+            parse_mode='Markdown',
+            reply_markup=markup
+        )
+        return
+    
+    # Если доступ есть — показываем главное меню
+    if not check_subscription(chat_id):
+        send_subscription_required(chat_id)
+        return
+    
+    markup = types.InlineKeyboardMarkup(row_width=2)
+    btn1 = types.InlineKeyboardButton('💰 Купить подписку', callback_data='buy')
+    btn2 = types.InlineKeyboardButton('📋 Моя подписка', callback_data='my_sub')
+    btn3 = types.InlineKeyboardButton('🆘 Тех.Поддержка', callback_data='support')
+    btn4 = types.InlineKeyboardButton('📖 Инструкция', callback_data='manual')
+    btn5 = types.InlineKeyboardButton('🎫 Промокод', callback_data='promo')
+    markup.add(btn1, btn2, btn3, btn4, btn5)
+    bot.send_message(chat_id, "🏆 Добро пожаловать в VPN-бот!\nВыберите действие:", reply_markup=markup)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    send_main_menu(message.chat.id)
+
+# ============ ОБРАБОТЧИК КНОПКИ "ПОЛУЧИТЬ ДОСТУП" ============
+@bot.callback_query_handler(func=lambda call: call.data == 'request_access')
+def request_access_callback(call):
+    user_id = call.from_user.id
+    username = call.from_user.username
+    
+    # Отправляем уведомление администратору
+    send_access_request_to_admin(user_id, username)
+    
+    # Отвечаем пользователю
+    bot.answer_callback_query(call.id, "✅ Запрос отправлен администратору! Ожидайте.")
+    bot.send_message(
+        user_id,
+        "📩 Ваш запрос на доступ отправлен администратору.\n"
+        "Ожидайте подтверждения. Обычно это занимает до 10 минут.\n\n"
+        "После получения доступа нажмите /start снова."
+    )
+
+# ============ ОБРАБОТЧИК ПРОВЕРКИ ПОДПИСКИ НА КАНАЛ ============
+@bot.callback_query_handler(func=lambda call: call.data == 'check_sub')
+def check_subscription_callback(call):
+    user_id = call.from_user.id
+    
+    if not has_access(user_id):
+        bot.answer_callback_query(call.id, "❌ Сначала получите доступ к боту!", show_alert=True)
+        send_main_menu(user_id)
+        return
+
+    if check_subscription(user_id):
+        bot.edit_message_text(
+            "✅ Подписка на канал подтверждена!\n\n🏆 Добро пожаловать в VPN-бот!",
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id
+        )
+        send_main_menu(user_id)
+        bot.answer_callback_query(call.id, "✅ Подписка подтверждена!")
+    else:
+        bot.answer_callback_query(
+            call.id, 
+            "❌ Вы ещё не подписались на канал!\nПодпишитесь и нажмите кнопку снова.",
+            show_alert=True
+        )
 
 # ============ ОБРАБОТЧИКИ КНОПОК ПОКУПКИ ============
 @bot.callback_query_handler(func=lambda call: call.data == 'buy')
