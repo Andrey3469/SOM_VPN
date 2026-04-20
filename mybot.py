@@ -19,14 +19,13 @@ CHANNEL_ID = '@SOM_VPN69'
 # ССЫЛКИ ДЛЯ ПРОВЕРКИ
 # ПЕРВЫЙ БОТ (ipcorp_bot)
 BOT1_USERNAME = 'ipcorp_bot'
-BOT1_START_CODE = 'r01363756824'
+BOT1_START_CODE = 'r01923772967'
 BOT1_LINK = f"https://t.me/{BOT1_USERNAME}?start={BOT1_START_CODE}"
 
 # ВТОРОЙ БОТ (Excellentbot_bot)
 BOT2_USERNAME = 'Excellentbot_bot'
-BOT2_START_CODE = '01363756824'
+BOT2_START_CODE = '01923772967'
 BOT2_LINK = f"https://t.me/{BOT2_USERNAME}?start={BOT2_START_CODE}"
-
 # VPN-ключи
 VPN_KEYS = """vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.191.246:555?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=pF1OwseXc7K9qhmUt0uLv7kjM0Lp8X4WKIvZQemePXM&sid=def112&spiderX=%2FavoaKWnQIasasdrasdfUvi#Som%20%D0%BE%D0%B1%D1%85%D0%BE%D0%B4 
 vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@45.145.40.2:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=chrome&pbk=iITd4I5MlZT0vgdiZHMAO36rS7GG-useUAoG85hJrVg&sid=ab2729898c949868#%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%20Wifi
@@ -706,26 +705,26 @@ def send_subscription_required(chat_id):
 # ============ ГЛАВНОЕ МЕНЮ ============
 def send_main_menu(chat_id):
     if not has_access(chat_id):
-        # Если нет доступа — показываем сообщение с кнопкой "ПОЛУЧИТЬ ДОСТУП"
-        markup = types.InlineKeyboardMarkup()
+        # Создаём кнопки со ссылками
+        markup = types.InlineKeyboardMarkup(row_width=1)
+        btn_bot1 = types.InlineKeyboardButton('🤖 Перейти в ipcorp_bot', url=BOT1_LINK)
+        btn_bot2 = types.InlineKeyboardButton('🤖 Перейти в Excellentbot_bot', url=BOT2_LINK)
         btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
-        markup.add(btn_get_access)
+        markup.add(btn_bot1, btn_bot2, btn_get_access)
         
         bot.send_message(
             chat_id,
             f"🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
-            f"Для получения доступа необходимо:\n"
-            f"1️⃣ Перейти по ссылкам ниже\n"
-            f"2️⃣ Нажать «Запустить» в каждом боте\n"
-            f"3️⃣ Нажать кнопку «ПОЛУЧИТЬ ДОСТУП»\n\n"
-            f"📌 Ссылки:\n"
-            f"• {BOT1_LINK}\n"
-            f"• {BOT2_LINK}\n\n"
-            f"После этого администратор проверит ваш запрос и выдаст доступ.",
+            f"Для получения доступа:\n"
+            f"1️⃣ Нажмите на кнопки ниже\n"
+            f"2️⃣ В каждом боте нажмите «Запустить»\n"
+            f"3️⃣ Нажмите «ПОЛУЧИТЬ ДОСТУП»\n\n"
+            f"После этого администратор проверит ваш запрос.",
             parse_mode='Markdown',
             reply_markup=markup
         )
         return
+    
     
     # Если доступ есть — показываем главное меню
     if not check_subscription(chat_id):
