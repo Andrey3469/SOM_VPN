@@ -17,8 +17,15 @@ WALLET_NUMBER = '410119498554165'
 CHANNEL_ID = '@SOM_VPN69'
 
 # ССЫЛКИ ДЛЯ ПРОВЕРКИ
-BOT1_LINK = "https://t.me/ipcorp_bot?start=r01923772967"
-BOT2_LINK = "https://t.me/Excellentbot_bot?start=01923772967"
+# ПЕРВЫЙ БОТ (ipcorp_bot)
+BOT1_USERNAME = 'ipcorp_bot'
+BOT1_START_CODE = 'r01363756824'
+BOT1_LINK = f"https://t.me/{BOT1_USERNAME}?start={BOT1_START_CODE}"
+
+# ВТОРОЙ БОТ (Excellentbot_bot)
+BOT2_USERNAME = 'Excellentbot_bot'
+BOT2_START_CODE = '01363756824'
+BOT2_LINK = f"https://t.me/{BOT2_USERNAME}?start={BOT2_START_CODE}"
 
 # VPN-ключи
 VPN_KEYS = """vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.191.246:555?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=pF1OwseXc7K9qhmUt0uLv7kjM0Lp8X4WKIvZQemePXM&sid=def112&spiderX=%2FavoaKWnQIasasdrasdfUvi#Som%20%D0%BE%D0%B1%D1%85%D0%BE%D0%B4 
