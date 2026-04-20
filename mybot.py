@@ -705,25 +705,31 @@ def send_subscription_required(chat_id):
 # ============ ГЛАВНОЕ МЕНЮ ============
 def send_main_menu(chat_id):
     if not has_access(chat_id):
-        # Создаём кнопки со ссылками
+        # Создаём кнопки со ссылками (здесь ссылки точно правильные)
         markup = types.InlineKeyboardMarkup(row_width=1)
-        btn_bot1 = types.InlineKeyboardButton('🤖 Перейти в ipcorp_bot', url=BOT1_LINK)
-        btn_bot2 = types.InlineKeyboardButton('🤖 Перейти в Excellentbot_bot', url=BOT2_LINK)
+        btn_bot1 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В ipcorp_bot', url=BOT1_LINK)
+        btn_bot2 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В Excellentbot_bot', url=BOT2_LINK)
         btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
         markup.add(btn_bot1, btn_bot2, btn_get_access)
         
         bot.send_message(
             chat_id,
             f"🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
-            f"Для получения доступа:\n"
+            f"📌 **Для получения доступа:**\n"
             f"1️⃣ Нажмите на кнопки ниже\n"
             f"2️⃣ В каждом боте нажмите «Запустить»\n"
             f"3️⃣ Нажмите «ПОЛУЧИТЬ ДОСТУП»\n\n"
-            f"После этого администратор проверит ваш запрос.",
+            f"После этого администратор проверит ваш запрос и выдаст доступ.",
             parse_mode='Markdown',
             reply_markup=markup
         )
         return
+    
+    if not check_subscription(chat_id):
+        send_subscription_required(chat_id)
+        return
+    
+    
     
     
     # Если доступ есть — показываем главное меню
