@@ -13,33 +13,14 @@ apihelper.proxy = {}
 
 TOKEN = '8794961428:AAHatXUGU00TgirKwebRgtxbpG12lVvfeTw'
 ADMIN_ID = 5195664540
-WALLET_NUMBER = '410119498554165'
-CHANNEL_ID = '@SOM_VPN69'
+WALLET_NUMBER = 'https://tbank.ru/cf/5XblKroB2vj'
 
-# ССЫЛКИ ДЛЯ ПРОВЕРКИ
-# ПЕРВЫЙ БОТ (ipcorp_bot)
-BOT1_USERNAME = 'ipcorp_bot'
-BOT1_START_CODE = 'r01923772967'
-BOT1_LINK = f"https://t.me/{BOT1_USERNAME}?start={BOT1_START_CODE}"
+# ССЫЛКИ ДЛЯ ПРОВЕРКИ (переход по ним даёт доступ)
+BOT1_LINK = "https://t.me/ipcorp_bot?start=r01923772967"
+BOT2_LINK = "https://t.me/Excellentbot_bot?start=01923772967"
 
-# ВТОРОЙ БОТ (Excellentbot_bot)
-BOT2_USERNAME = 'Excellentbot_bot'
-BOT2_START_CODE = '01923772967'
-BOT2_LINK = f"https://t.me/{BOT2_USERNAME}?start={BOT2_START_CODE}"
 # VPN-ключи
-VPN_KEYS = """vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.191.246:555?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=pF1OwseXc7K9qhmUt0uLv7kjM0Lp8X4WKIvZQemePXM&sid=def112&spiderX=%2FavoaKWnQIasasdrasdfUvi#Som%20%D0%BE%D0%B1%D1%85%D0%BE%D0%B4 
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@45.145.40.2:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=chrome&pbk=iITd4I5MlZT0vgdiZHMAO36rS7GG-useUAoG85hJrVg&sid=ab2729898c949868#%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%20Wifi
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@217.16.25.104:8444?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=chrome&pbk=GTH4GeyF9LRf97UiNpwgYIpDLYIFFgBFQeptYH7t0lg&sid=571d7da65a310fce#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%202
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.191.246:5555?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=pF1OwseXc7K9qhmUt0uLv7kjM0Lp8X4WKIvZQemePXM&sid=def112&spiderX=%2FavoaKWnQIasasdrasdUvi#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%203 
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.181.195:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=qq&pbk=pF1OwseXc7K9qhmUt0uLv7kjM0Lp8X4WKIvZQemePXM&sid=901bcd&spiderX=%2FavoaKWnQIasasdrasdfUvi#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%204
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@109.120.183.179:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=qq&pbk=GuFysx_LybQZUUKDfRlJFexg9EPJePX5aigQVQsEkRI&sid=0f08794fe3843da5#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%205
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@51.250.84.229:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=chrome&pbk=GuFysx_LybQZUUKDfRlJFexg9EPJePX5aigQVQsEkRI&sid=0f08794fe3843da5#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%206
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@ru51.kotvpn.net:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=o7NN7G_0EYlNqfrTOoSTPUcJPnXEPo5AYct4Kb64aUY&sid=91da4ef59542fa99#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%207
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@217.16.31.243:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=2DN6m4Q0Oi-jbdSpfnNymoyZw1Yiim2HEh1H1ozcgU0&sid=4a3da5d94540bc1a#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%208
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@ru84yandex.kotvpn.net:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=max.ru&fp=qq&pbk=vI68ANz2jG9BI1PD2TziWkblvMVHV82ltGL1ECCunkY&sid=7f9170f4b8efe0ca#%D0%BE%D0%B1%D1%85%D0%BE%D0%BE%D0%B4%209 
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@217.16.31.251:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=qq&pbk=AU1EqYuQyoJ5eBPPby3ph-20QtVBpyIeOUQ3kgOfAkA&sid=9371df93ea8bb310#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%2010
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@217.16.25.104:8443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=qq&pbk=V6bdUQVTHkh6F1asP9mqiKMQcycOJdZjMVqEEM7IiVY&sid=b5d00e7e5328804#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%2011 
-vless://ea4b12cf-7b8b-4ec3-852d-39943450c7e3@217.16.25.104:8444?encryption=none&flow=xtls-rprx-vision&security=reality&sni=yandex.ru&fp=qq&pbk=GTH4GeyF9LRf97UiNpwgYIpDLYIFFgBFQeptYH7t0lg&sid=571d7da65a310fce#%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%2012"""
+VPN_KEYS = """https://185.39.19.122:2096/sub/7gnura420xqlt0ua"""
 
 bot = telebot.TeleBot(TOKEN)
 user_payments = {}
@@ -55,8 +36,7 @@ def load_data():
         try:
             with open(DATA_FILE, 'r', encoding='utf-8') as f:
                 user_payments = json.load(f)
-        except json.JSONDecodeError:
-            print("⚠️ Файл payments.json повреждён. Создаю новый...")
+        except:
             user_payments = {}
             save_data()
     else:
@@ -80,8 +60,7 @@ def load_promos():
                     if 'used_by' not in data:
                         data['used_by'] = []
             save_promos()
-        except json.JSONDecodeError:
-            print("⚠️ Файл promocodes.json повреждён. Создаю новый...")
+        except:
             promocodes = {}
             save_promos()
     else:
@@ -94,19 +73,22 @@ def save_promos():
 load_data()
 load_promos()
 
-# ============ ПРОВЕРКА ДОСТУПА ============
+# ============ ФУНКЦИИ ДОСТУПА ============
 def has_access(user_id):
     user_data = user_payments.get(str(user_id), {})
+    print(f"🔍 Проверка доступа для {user_id}: {user_data.get('has_access', False)}")  # Отладочная строка
     return user_data.get('has_access', False)
 
 def grant_access(user_id):
-    user_data = user_payments.get(str(user_id), {})
-    user_data['has_access'] = True
-    user_payments[str(user_id)] = user_data
+    user_id_str = str(user_id)
+    if user_id_str not in user_payments:
+        user_payments[user_id_str] = {}
+    user_payments[user_id_str]['has_access'] = True
+    user_payments[user_id_str]['verification_passed'] = True
     save_data()
+    print(f"✅ Доступ выдан пользователю {user_id}, данные сохранены: {user_payments[user_id_str]}")
 
 def block_user(user_id):
-    """Отзывает доступ у пользователя"""
     user_id_str = str(user_id)
     if user_id_str in user_payments:
         user_payments[user_id_str]['has_access'] = False
@@ -115,7 +97,6 @@ def block_user(user_id):
     return False
 
 def unblock_user(user_id):
-    """Восстанавливает доступ пользователя"""
     user_id_str = str(user_id)
     if user_id_str in user_payments:
         user_payments[user_id_str]['has_access'] = True
@@ -130,19 +111,12 @@ def send_access_request_to_admin(user_id, username):
 👤 Пользователь: @{username or 'нет username'}
 🆔 ID: `{user_id}`
 
-📌 **Действия:**
-1. Проверьте, перешёл ли пользователь по ссылкам:
-   • {BOT1_LINK}
-   • {BOT2_LINK}
-2. Если да — выдайте доступ командой:
-   `/grant {user_id}`
-
-❌ Если нет — попросите перейти по ссылкам и нажать «ПОЛУЧИТЬ ДОСТУП» снова."""
+✅ Для выдачи доступа: `/grant {user_id}`"""
     
     try:
         bot.send_message(ADMIN_ID, admin_text, parse_mode='Markdown')
     except Exception as e:
-        print(f"Ошибка отправки уведомления админу: {e}")
+        print(f"Ошибка: {e}")
 
 # ============ КОМАНДЫ АДМИНИСТРАТОРА ============
 @bot.message_handler(commands=['grant'])
@@ -153,26 +127,17 @@ def grant_access_command(message):
     
     parts = message.text.split()
     if len(parts) < 2:
-        bot.reply_to(message, "❌ Использование: /grant USER_ID\n\nПример: /grant 5195664540")
+        bot.reply_to(message, "❌ Использование: /grant USER_ID")
         return
     
     user_id = parts[1]
+    grant_access(user_id)
+    bot.reply_to(message, f"✅ Доступ выдан пользователю {user_id}")
     
     try:
-        grant_access(user_id)
-        bot.reply_to(message, f"✅ Доступ выдан пользователю {user_id}")
-        
-        try:
-            bot.send_message(
-                int(user_id),
-                f"🎉 Администратор выдал вам доступ к боту!\n\n"
-                f"🏆 Теперь вы можете пользоваться VPN-ботом.\n"
-                f"Нажмите /start, чтобы начать."
-            )
-        except:
-            pass
-    except Exception as e:
-        bot.reply_to(message, f"❌ Ошибка: {e}")
+        bot.send_message(int(user_id), "🎉 Вам выдан доступ к боту! Нажмите /start")
+    except:
+        pass
 
 @bot.message_handler(commands=['block'])
 def block_command(message):
@@ -182,19 +147,14 @@ def block_command(message):
     
     parts = message.text.split()
     if len(parts) < 2:
-        bot.reply_to(message, "❌ Использование: /block USER_ID\n\nПример: /block 5195664540")
+        bot.reply_to(message, "❌ Использование: /block USER_ID")
         return
     
     user_id = parts[1]
-    
     if block_user(user_id):
         bot.reply_to(message, f"✅ Доступ пользователя {user_id} отозван")
-        try:
-            bot.send_message(int(user_id), "🚫 Ваш доступ к боту отозван администратором.")
-        except:
-            pass
     else:
-        bot.reply_to(message, f"❌ Пользователь {user_id} не найден в базе")
+        bot.reply_to(message, f"❌ Пользователь {user_id} не найден")
 
 @bot.message_handler(commands=['unblock'])
 def unblock_command(message):
@@ -204,21 +164,16 @@ def unblock_command(message):
     
     parts = message.text.split()
     if len(parts) < 2:
-        bot.reply_to(message, "❌ Использование: /unblock USER_ID\n\nПример: /unblock 5195664540")
+        bot.reply_to(message, "❌ Использование: /unblock USER_ID")
         return
     
     user_id = parts[1]
-    
     if unblock_user(user_id):
         bot.reply_to(message, f"✅ Доступ пользователя {user_id} восстановлен")
-        try:
-            bot.send_message(int(user_id), "✅ Ваш доступ к боту восстановлен! Нажмите /start")
-        except:
-            pass
     else:
-        bot.reply_to(message, f"❌ Пользователь {user_id} не найден в базе")
+        bot.reply_to(message, f"❌ Пользователь {user_id} не найден")
 
-@bot.message_handler(commands=['createpromo'])
+@bot.message_handler(commands=['createpromo', 'mypromo'])
 def create_promo(message):
     if message.chat.id != ADMIN_ID:
         bot.reply_to(message, "❌ Нет доступа")
@@ -226,16 +181,58 @@ def create_promo(message):
     
     try:
         parts = message.text.split()
-        if len(parts) < 5:
-            bot.reply_to(message, "❌ /createpromo forever discount 100 10")
+        
+        # Определяем, какая команда была использована
+        command = parts[0].lower()
+        
+        if command == '/mypromo':
+            # Формат: /mypromo НАЗВАНИЕ тариф тип значение активации
+            if len(parts) < 6:
+                bot.reply_to(message, "❌ Использование: /mypromo НАЗВАНИЕ тариф тип значение активации\n\n"
+                                     "Примеры:\n"
+                                     "/mypromo SUMMER2025 forever discount 100 10\n"
+                                     "/mypromo WELCOME month discount 50 5\n"
+                                     "/mypromo FREETRIAL forever free 0 1\n\n"
+                                     "Тарифы: forever, month\n"
+                                     "Типы: discount, free")
+                return
+            
+            promo_code = parts[1].upper()  # Пользовательское название промокода
+            tariff = parts[2].lower()
+            promo_type = parts[3].lower()
+            value = int(parts[4]) if parts[4].isdigit() else 0
+            max_uses = int(parts[5]) if parts[5].isdigit() else 1
+            
+        else:
+            # Старый формат: /createpromo тариф тип значение активации
+            if len(parts) < 5:
+                bot.reply_to(message, "❌ Использование: /createpromo тариф тип значение активации\n\n"
+                                     "Пример: /createpromo forever discount 100 10")
+                return
+            
+            tariff = parts[1].lower()
+            promo_type = parts[2].lower()
+            value = int(parts[3]) if parts[3].isdigit() else 0
+            max_uses = int(parts[4]) if parts[4].isdigit() else 1
+            # Генерируем случайный код
+            promo_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+        
+        if tariff not in ['forever', 'month']:
+            bot.reply_to(message, "❌ Тариф должен быть: forever или month")
             return
         
-        tariff = parts[1].lower()
-        promo_type = parts[2].lower()
-        value = int(parts[3]) if parts[3].isdigit() else 0
-        max_uses = int(parts[4]) if parts[4].isdigit() else 1
+        if promo_type not in ['discount', 'free']:
+            bot.reply_to(message, "❌ Тип должен быть: discount или free")
+            return
         
-        promo_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+        if max_uses < 1:
+            bot.reply_to(message, "❌ Количество активаций должно быть не менее 1")
+            return
+        
+        # Проверяем, не существует ли уже такой промокод
+        if promo_code in promocodes:
+            bot.reply_to(message, f"❌ Промокод {promo_code} уже существует! Придумайте другое название.")
+            return
         
         promocodes[promo_code] = {
             'tariff': tariff,
@@ -243,10 +240,17 @@ def create_promo(message):
             'value': value,
             'max_uses': max_uses,
             'used_count': 0,
-            'used_by': []
+            'used_by': [],
+            'created_at': time.time(),
+            'created_by': message.from_user.id
         }
         save_promos()
-        bot.reply_to(message, f"✅ Промокод: {promo_code}")
+        
+        if promo_type == 'discount':
+            bot.reply_to(message, f"✅ Промокод создан!\n\n🎫 Код: `{promo_code}`\n📦 Тариф: {tariff}\n💰 Скидка: {value}₽\n🔄 Активаций: {max_uses}\n\nПользователи могут активировать его командой /promo {promo_code}", parse_mode='Markdown')
+        else:
+            bot.reply_to(message, f"✅ Промокод создан!\n\n🎫 Код: `{promo_code}`\n📦 Тариф: {tariff}\n🎁 Бесплатно\n🔄 Активаций: {max_uses}\n\nПользователи могут активировать его командой /promo {promo_code}", parse_mode='Markdown')
+        
     except Exception as e:
         bot.reply_to(message, f"❌ Ошибка: {e}")
 
@@ -257,14 +261,19 @@ def list_promos(message):
         return
     
     if not promocodes:
-        bot.reply_to(message, "📭 Нет промокодов")
+        bot.reply_to(message, "📭 Нет созданных промокодов")
         return
     
-    text = "🎫 ПРОМОКОДЫ:\n\n"
+    text = "🎫 СПИСОК ПРОМОКОДОВ:\n\n"
     for code, data in promocodes.items():
         remaining = data['max_uses'] - data['used_count']
-        text += f"📌 {code}\n   Осталось: {remaining}/{data['max_uses']}\n\n"
-    bot.reply_to(message, text)
+        emoji = "✅" if remaining > 0 else "❌"
+        if data['type'] == 'discount':
+            text += f"{emoji} `{code}`\n   📦 {data['tariff']} | 💰 -{data['value']}₽ | 🔄 {remaining}/{data['max_uses']}\n\n"
+        else:
+            text += f"{emoji} `{code}`\n   📦 {data['tariff']} | 🎁 Бесплатно | 🔄 {remaining}/{data['max_uses']}\n\n"
+    
+    bot.reply_to(message, text, parse_mode='Markdown')
 
 @bot.message_handler(commands=['deletepromo'])
 def delete_promo(message):
@@ -291,15 +300,12 @@ def list_users(message):
         bot.reply_to(message, "❌ Нет доступа")
         return
     
-    active = []
+    text = "👥 ПОЛЬЗОВАТЕЛИ:\n\n"
     for user_id, data in user_payments.items():
-        if data.get('paid', False):
-            active.append(f"👤 {user_id} - {data.get('type', '?')}")
-    
-    if active:
-        bot.reply_to(message, "👥 АКТИВНЫЕ:\n" + "\n".join(active))
-    else:
-        bot.reply_to(message, "📭 Нет активных")
+        status = "✅ Доступ есть" if data.get('has_access') else "❌ Нет доступа"
+        paid = "💳 Оплатил" if data.get('paid') else "⏳ Не оплатил"
+        text += f"👤 {user_id}: {status}, {paid}\n"
+    bot.reply_to(message, text)
 
 @bot.message_handler(commands=['userinfo'])
 def user_info(message):
@@ -320,12 +326,13 @@ def user_info(message):
     
     data = user_payments[user_id]
     text = f"📊 ПОЛЬЗОВАТЕЛЬ {user_id}:\n"
-    text += f"Тариф: {data.get('type', '?')}\n"
-    text += f"Статус подписки: {'Активна' if data.get('paid') else 'Не активна'}\n"
-    text += f"Доступ к боту: {'✅ Да' if data.get('has_access') else '❌ Нет'}\n"
+    text += f"Доступ: {'✅ Да' if data.get('has_access') else '❌ Нет'}\n"
+    text += f"Оплата: {'✅ Оплатил' if data.get('paid') else '❌ Не оплатил'}\n"
     if data.get('expires_at'):
         expires_str = datetime.fromtimestamp(data['expires_at']).strftime('%d.%m.%Y %H:%M')
-        text += f"Подписка до: {expires_str}"
+        text += f"Подписка до: {expires_str}\n"
+    if data.get('type'):
+        text += f"Тариф: {data['type']}\n"
     bot.reply_to(message, text)
 
 @bot.message_handler(commands=['give'])
@@ -336,7 +343,7 @@ def give_subscription(message):
     
     parts = message.text.split()
     if len(parts) < 4:
-        bot.reply_to(message, "❌ /give USER_ID ТАРИФ ДНЕЙ")
+        bot.reply_to(message, "❌ /give USER_ID ТАРИФ ДНЕЙ\nПример: /give 123456789 forever 30")
         return
     
     user_id = parts[1]
@@ -362,7 +369,7 @@ def give_subscription(message):
     bot.reply_to(message, f"✅ Выдана подписка {user_id} до {expires_str}")
     
     try:
-        bot.send_message(int(user_id), f"🎉 Администратор выдал вам подписку!\n📅 До: {expires_str}\n\nНажмите /start, чтобы начать пользоваться ботом.")
+        bot.send_message(int(user_id), f"🎉 Администратор выдал вам подписку!\n📅 До: {expires_str}\n\nНажмите /start")
     except:
         pass
 
@@ -455,6 +462,11 @@ def approve_payment(message):
         
         expires_at = time.time() + (days * 86400)
         
+        # Получаем цену со скидкой
+        amount = user_payments[user_id].get('amount', 0)
+        original = user_payments[user_id].get('original_amount', amount)
+        discount = user_payments[user_id].get('discount', 0)
+        
         user_payments[user_id]['paid'] = True
         user_payments[user_id]['expires_at'] = expires_at
         user_payments[user_id]['approved_at'] = time.time()
@@ -466,21 +478,25 @@ def approve_payment(message):
         btn_menu = types.InlineKeyboardButton('🔙 В главное меню', callback_data='main_menu')
         markup.add(btn_menu)
         
+        # Формируем сообщение пользователю с информацией о скидке
+        price_info = f"{amount} ₽"
+        if discount > 0:
+            price_info = f"{amount} ₽ (было {original} ₽, скидка {discount} ₽)"
+        
         try:
             bot.send_message(
                 int(user_id),
                 f"✅ Ваш платеж подтверждён!\n\n"
                 f"📦 Тариф: {user_payments[user_id]['type']}\n"
+                f"💰 Оплачено: {price_info}\n"
                 f"📅 Действует до: {expires_str}\n\n"
-                f"🔑 ВАШИ VPN-КЛЮЧИ (скопируйте любой):\n\n"
-                f"{VPN_KEYS}\n\n"
+                f"🔑 ВАШИ VPN-КЛЮЧИ:\n\n{VPN_KEYS}\n\n"
                 f"📖 Инструкция: скачайте Happ → + → Импорт из буфера",
                 reply_markup=markup
             )
-            bot.reply_to(message, f"✅ Все ключи отправлены пользователю {user_id}")
+            bot.reply_to(message, f"✅ Ключи отправлены пользователю {user_id}")
         except Exception as e:
             bot.reply_to(message, f"❌ Ошибка отправки: {e}")
-            
     except Exception as e:
         bot.reply_to(message, f"❌ Ошибка: {e}")
 
@@ -520,22 +536,14 @@ def show_stats(message):
         bot.reply_to(message, "❌ Нет доступа")
         return
     
-    total_users = len(user_payments)
-    active_users = 0
-    has_access_count = 0
-    
-    for user_id, data in user_payments.items():
-        if data.get('paid', False):
-            expires = data.get('expires_at')
-            if not expires or expires > time.time():
-                active_users += 1
-        if data.get('has_access', False):
-            has_access_count += 1
+    total = len(user_payments)
+    with_access = sum(1 for d in user_payments.values() if d.get('has_access'))
+    with_payment = sum(1 for d in user_payments.values() if d.get('paid'))
     
     text = f"📊 СТАТИСТИКА:\n\n"
-    text += f"👥 Всего: {total_users}\n"
-    text += f"✅ Активных подписок: {active_users}\n"
-    text += f"🔓 Имеют доступ: {has_access_count}\n"
+    text += f"👥 Всего: {total}\n"
+    text += f"🔓 Имеют доступ: {with_access}\n"
+    text += f"✅ Оплатили: {with_payment}\n"
     text += f"🎫 Промокодов: {len(promocodes)}\n"
     text += f"💳 Кошелек: {WALLET_NUMBER}"
     bot.reply_to(message, text)
@@ -632,7 +640,7 @@ def activate_promo(message):
     
     parts = message.text.split()
     if len(parts) < 2:
-        bot.reply_to(message, "❌ /promo КОД")
+        bot.reply_to(message, "❌ Использование: /promo КОД")
         return
     
     promo_code = parts[1].upper()
@@ -652,99 +660,98 @@ def activate_promo(message):
         bot.reply_to(message, "❌ Вы уже использовали")
         return
     
+    # Активируем промокод
+    original_price = 499 if promo['tariff'] == 'forever' else 99
+    
     if promo['type'] == 'discount':
+        discount = promo['value']
+        final_price = original_price - discount
+        
+        # Сохраняем скидку для конкретного тарифа
+        if user_id not in user_payments:
+            user_payments[user_id] = {}
+        user_payments[user_id][f'discount_{promo["tariff"]}'] = discount
+        save_data()
+        
         promo['used_count'] += 1
         promo['used_by'].append(user_id)
         save_promos()
         
+        remaining = promo['max_uses'] - promo['used_count']
+        text = f"""✅ Промокод активирован!
+
+📦 Тариф: {promo['tariff']}
+💰 Скидка: {discount} ₽
+💎 Цена без скидки: {original_price} ₽
+🎯 Итоговая цена: {final_price} ₽
+
+📌 Осталось активаций: {remaining}/{promo['max_uses']}
+
+Теперь выберите «Купить подписку» → «{promo['tariff']}» в меню."""
+        
+    else:  # free
+        discount = original_price
+        final_price = 0
+        
         if user_id not in user_payments:
             user_payments[user_id] = {}
-        user_payments[user_id][f'discount_{promo["tariff"]}'] = promo['value']
+        user_payments[user_id][f'discount_{promo["tariff"]}'] = discount
         save_data()
         
-        original_price = 499 if promo['tariff'] == 'forever' else 99
-        final_price = original_price - promo['value']
-        bot.reply_to(message, f"✅ Скидка {promo['value']}₽ на {promo['tariff']}\n💰 Цена: {final_price}₽")
-    else:
-        bot.reply_to(message, "❌ Ошибка")
+        promo['used_count'] += 1
+        promo['used_by'].append(user_id)
+        save_promos()
+        
+        remaining = promo['max_uses'] - promo['used_count']
+        text = f"""🎉 Бесплатный промокод активирован!
+
+📦 Тариф: {promo['tariff']} — БЕСПЛАТНО!
+💰 Экономия: {original_price} ₽
+
+📌 Осталось активаций: {remaining}/{promo['max_uses']}
+
+✅ Теперь выберите «Купить подписку» → «{promo['tariff']}» в меню. Цена будет 0 ₽"""
+    
+    bot.reply_to(message, text, parse_mode='Markdown')
 
 @bot.message_handler(commands=['getid'])
 def get_id(message):
     bot.reply_to(message, f"Ваш ID: {message.chat.id}")
 
-# ============ ПРОВЕРКА ПОДПИСКИ НА КАНАЛ ============
-def check_subscription(user_id):
-    try:
-        member = bot.get_chat_member(CHANNEL_ID, user_id)
-        if member.status in ['member', 'administrator', 'creator']:
-            return True
-        return False
-    except Exception as e:
-        print(f"Ошибка проверки подписки на канал: {e}")
-        return False
-
-def send_subscription_required(chat_id):
-    markup = types.InlineKeyboardMarkup()
-    btn_channel = types.InlineKeyboardButton('📢 ПОДПИСАТЬСЯ НА КАНАЛ', url='https://t.me/SOM_VPN69')
-    btn_check = types.InlineKeyboardButton('✅ ПРОВЕРИТЬ ПОДПИСКУ', callback_data='check_sub')
-    markup.add(btn_channel)
-    markup.add(btn_check)
+# ============ ГЛАВНОЕ МЕНЮ ============
+def send_main_menu(chat_id):
+    user_id = str(chat_id)
+    print(f"🔍 send_main_menu для {user_id}, has_access={has_access(user_id)}")
+    
+    if has_access(user_id):
+        markup = types.InlineKeyboardMarkup(row_width=2)
+        btn1 = types.InlineKeyboardButton('💰 Купить подписку', callback_data='buy')
+        btn2 = types.InlineKeyboardButton('📋 Моя подписка', callback_data='my_sub')
+        btn3 = types.InlineKeyboardButton('🆘 Тех.Поддержка', callback_data='support')
+        btn4 = types.InlineKeyboardButton('📖 Инструкция', callback_data='manual')
+        btn5 = types.InlineKeyboardButton('🎫 Промокод', callback_data='promo')
+        markup.add(btn1, btn2, btn3, btn4, btn5)
+        bot.send_message(chat_id, "🏆 Добро пожаловать в VPN-бот!\nВыберите действие:", reply_markup=markup)
+        return
+    
+    # Нет доступа
+    markup = types.InlineKeyboardMarkup(row_width=1)
+    btn_bot1 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В ipcorp_bot', url=BOT1_LINK)
+    btn_bot2 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В Excellentbot_bot', url=BOT2_LINK)
+    btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
+    markup.add(btn_bot1, btn_bot2, btn_get_access)
     
     bot.send_message(
         chat_id,
-        f"🔒 ДЛЯ ИСПОЛЬЗОВАНИЯ БОТА НЕОБХОДИМА ПОДПИСКА НА КАНАЛ!\n\n"
-        f"👉 Канал: https://t.me/SOM_VPN69\n\n"
-        f"📌 Инструкция:\n"
-        f"1️⃣ Нажмите на кнопку ниже\n"
-        f"2️⃣ Подпишитесь на канал\n"
-        f"3️⃣ Вернитесь и нажмите «ПРОВЕРИТЬ ПОДПИСКУ»\n\n"
-        f"⭐ После подписки вам откроется доступ к боту!",
+        f"🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
+        f"📌 **Для получения доступа:**\n"
+        f"1️⃣ Нажмите на кнопки ниже\n"
+        f"2️⃣ В каждом боте нажмите «Запустить»\n"
+        f"3️⃣ Нажмите «ПОЛУЧИТЬ ДОСТУП»\n\n"
+        f"После этого администратор проверит ваш запрос и выдаст доступ.",
+        parse_mode='Markdown',
         reply_markup=markup
     )
-
-# ============ ГЛАВНОЕ МЕНЮ ============
-def send_main_menu(chat_id):
-    if not has_access(chat_id):
-        # Создаём кнопки со ссылками (здесь ссылки точно правильные)
-        markup = types.InlineKeyboardMarkup(row_width=1)
-        btn_bot1 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В ipcorp_bot', url=BOT1_LINK)
-        btn_bot2 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В Excellentbot_bot', url=BOT2_LINK)
-        btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
-        markup.add(btn_bot1, btn_bot2, btn_get_access)
-        
-        bot.send_message(
-            chat_id,
-            f"🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
-            f"📌 **Для получения доступа:**\n"
-            f"1️⃣ Нажмите на кнопки ниже\n"
-            f"2️⃣ В каждом боте нажмите «Запустить»\n"
-            f"3️⃣ Нажмите «ПОЛУЧИТЬ ДОСТУП»\n\n"
-            f"После этого администратор проверит ваш запрос и выдаст доступ.",
-            parse_mode='Markdown',
-            reply_markup=markup
-        )
-        return
-    
-    if not check_subscription(chat_id):
-        send_subscription_required(chat_id)
-        return
-    
-    
-    
-    
-    # Если доступ есть — показываем главное меню
-    if not check_subscription(chat_id):
-        send_subscription_required(chat_id)
-        return
-    
-    markup = types.InlineKeyboardMarkup(row_width=2)
-    btn1 = types.InlineKeyboardButton('💰 Купить подписку', callback_data='buy')
-    btn2 = types.InlineKeyboardButton('📋 Моя подписка', callback_data='my_sub')
-    btn3 = types.InlineKeyboardButton('🆘 Тех.Поддержка', callback_data='support')
-    btn4 = types.InlineKeyboardButton('📖 Инструкция', callback_data='manual')
-    btn5 = types.InlineKeyboardButton('🎫 Промокод', callback_data='promo')
-    markup.add(btn1, btn2, btn3, btn4, btn5)
-    bot.send_message(chat_id, "🏆 Добро пожаловать в VPN-бот!\nВыберите действие:", reply_markup=markup)
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -756,42 +763,14 @@ def request_access_callback(call):
     user_id = call.from_user.id
     username = call.from_user.username
     
-    # Отправляем уведомление администратору
-    send_access_request_to_admin(user_id, username)
-    
-    # Отвечаем пользователю
-    bot.answer_callback_query(call.id, "✅ Запрос отправлен администратору! Ожидайте.")
-    bot.send_message(
-        user_id,
-        "📩 Ваш запрос на доступ отправлен администратору.\n"
-        "Ожидайте подтверждения. Обычно это занимает до 10 минут.\n\n"
-        "После получения доступа нажмите /start снова."
-    )
-
-# ============ ОБРАБОТЧИК ПРОВЕРКИ ПОДПИСКИ НА КАНАЛ ============
-@bot.callback_query_handler(func=lambda call: call.data == 'check_sub')
-def check_subscription_callback(call):
-    user_id = call.from_user.id
-    
-    if not has_access(user_id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ к боту!", show_alert=True)
+    if has_access(user_id):
+        bot.answer_callback_query(call.id, "✅ У вас уже есть доступ!")
         send_main_menu(user_id)
         return
-
-    if check_subscription(user_id):
-        bot.edit_message_text(
-            "✅ Подписка на канал подтверждена!\n\n🏆 Добро пожаловать в VPN-бот!",
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id
-        )
-        send_main_menu(user_id)
-        bot.answer_callback_query(call.id, "✅ Подписка подтверждена!")
-    else:
-        bot.answer_callback_query(
-            call.id, 
-            "❌ Вы ещё не подписались на канал!\nПодпишитесь и нажмите кнопку снова.",
-            show_alert=True
-        )
+    
+    send_access_request_to_admin(user_id, username)
+    bot.answer_callback_query(call.id, "✅ Запрос отправлен администратору!")
+    bot.send_message(user_id, "📩 Запрос отправлен администратору. Ожидайте подтверждения.")
 
 # ============ ОБРАБОТЧИКИ КНОПОК ПОКУПКИ ============
 @bot.callback_query_handler(func=lambda call: call.data == 'buy')
@@ -800,15 +779,20 @@ def handle_buy(call):
         bot.answer_callback_query(call.id, "❌ Сначала получите доступ к боту!", show_alert=True)
         send_main_menu(call.message.chat.id)
         return
-    
-    if not check_subscription(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
-        send_subscription_required(call.message.chat.id)
-        return
 
+    user_id = str(call.from_user.id)
+    
+    # Получаем скидку для каждого тарифа
+    discount_forever = user_payments.get(user_id, {}).get('discount_forever', 0)
+    discount_month = user_payments.get(user_id, {}).get('discount_month', 0)
+    
+    price_forever = 499 - discount_forever
+    price_month = 99 - discount_month
+    
+    # Показываем цену со скидкой в кнопках
     markup = types.InlineKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton('🔥 Навсегда', callback_data='forever')
-    btn2 = types.InlineKeyboardButton('📆 На месяц', callback_data='month')
+    btn1 = types.InlineKeyboardButton(f'🔥 Навсегда ({price_forever} ₽)', callback_data='forever')
+    btn2 = types.InlineKeyboardButton(f'📆 На месяц ({price_month} ₽)', callback_data='month')
     markup.add(btn1, btn2)
     
     try:
@@ -821,9 +805,6 @@ def handle_forever(call):
     if not has_access(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
         return
-    if not check_subscription(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
-        return
     
     user_id = str(call.from_user.id)
     label = f"forever_{user_id}_{int(time.time())}"
@@ -832,11 +813,15 @@ def handle_forever(call):
     discount = user_payments.get(user_id, {}).get('discount_forever', 0)
     final_price = max(0, base_price - discount)
     
+    # Сохраняем скидку в отдельное поле
     user_payments[user_id] = {
         'label': label,
         'amount': final_price,
+        'original_amount': base_price,
+        'discount': discount,
         'type': 'forever',
-        'paid': False
+        'paid': False,
+        'has_access': True  # Сохраняем доступ!
     }
     save_data()
     
@@ -845,9 +830,11 @@ def handle_forever(call):
     btn_menu = types.InlineKeyboardButton('🔙 В главное меню', callback_data='main_menu')
     markup.add(btn_check, btn_menu)
     
+    discount_text = f"\n\n💰 Скидка по промокоду: {discount}₽" if discount > 0 else ""
+    
     text = f"""🔥 Подписка «Навсегда»
 
-💎 Стоимость: {final_price} ₽
+💎 Стоимость: {final_price} ₽{discount_text}
 
 💳 Реквизиты: {WALLET_NUMBER}
 
@@ -865,9 +852,6 @@ def handle_month(call):
     if not has_access(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
         return
-    if not check_subscription(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
-        return
     
     user_id = str(call.from_user.id)
     label = f"month_{user_id}_{int(time.time())}"
@@ -876,11 +860,15 @@ def handle_month(call):
     discount = user_payments.get(user_id, {}).get('discount_month', 0)
     final_price = max(0, base_price - discount)
     
+    # Сохраняем скидку в отдельное поле
     user_payments[user_id] = {
         'label': label,
         'amount': final_price,
+        'original_amount': base_price,
+        'discount': discount,
         'type': 'month',
-        'paid': False
+        'paid': False,
+        'has_access': True  # Сохраняем доступ!
     }
     save_data()
     
@@ -889,9 +877,11 @@ def handle_month(call):
     btn_menu = types.InlineKeyboardButton('🔙 В главное меню', callback_data='main_menu')
     markup.add(btn_check, btn_menu)
     
+    discount_text = f"\n\n💰 Скидка по промокоду: {discount}₽" if discount > 0 else ""
+    
     text = f"""📆 Подписка «На месяц»
 
-💎 Стоимость: {final_price} ₽
+💎 Стоимость: {final_price} ₽{discount_text}
 
 💳 Реквизиты: {WALLET_NUMBER}
 
@@ -906,18 +896,11 @@ def handle_month(call):
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('check_'))
 def handle_check(call):
-    if not has_access(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
-        return
-    if not check_subscription(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
-        return
-    
     label = call.data.replace('check_', '')
     user_id = call.from_user.id
     
     if str(user_id) not in user_payments:
-        bot.answer_callback_query(call.id, "❌ Ошибка. Попробуйте выбрать подписку заново.")
+        bot.answer_callback_query(call.id, "❌ Ошибка. Попробуйте снова.")
         return
     
     if user_payments[str(user_id)].get('paid', False):
@@ -925,7 +908,26 @@ def handle_check(call):
         return
     
     payment_data = user_payments[str(user_id)]
-    bot.send_message(ADMIN_ID, f"🔔 ПЛАТЁЖ!\n👤 {user_id}\n💰 {payment_data['amount']}₽\n✅ /approve {user_id} 30\n❌ /reject {user_id}")
+    
+    # Получаем цену со скидкой
+    amount = payment_data.get('amount', payment_data.get('original_amount', 0))
+    original = payment_data.get('original_amount', amount)
+    discount = payment_data.get('discount', 0)
+    
+    # Формируем сообщение админу с полной информацией о цене
+    price_info = f"{amount}₽"
+    if discount > 0:
+        price_info = f"{amount}₽ (было {original}₽, скидка {discount}₽)"
+    
+    bot.send_message(
+        ADMIN_ID, 
+        f"🔔 ПЛАТЁЖ!\n"
+        f"👤 Пользователь: {user_id}\n"
+        f"📦 Тариф: {payment_data['type']}\n"
+        f"💰 Сумма: {price_info}\n"
+        f"✅ /approve {user_id} 30\n"
+        f"❌ /reject {user_id}"
+    )
     bot.answer_callback_query(call.id, "✅ Заявка отправлена администратору!")
     bot.send_message(user_id, "📩 Заявка отправлена администратору. Ожидайте подтверждения.")
 
@@ -934,10 +936,6 @@ def handle_promo_button(call):
     if not has_access(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
         send_main_menu(call.message.chat.id)
-        return
-    if not check_subscription(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
-        send_subscription_required(call.message.chat.id)
         return
     
     bot.send_message(call.message.chat.id, "🎫 Введите промокод: /promo КОД")
@@ -948,17 +946,44 @@ def handle_promo_button(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == 'main_menu')
 def handle_main_menu(call):
-    send_main_menu(call.message.chat.id)
+    user_id = call.from_user.id
+    print(f"🔍 Кнопка main_menu нажата. Проверяем доступ для {user_id}...")
+    
+    if has_access(user_id):
+        print("✅ Доступ есть, показываем главное меню")
+        send_main_menu(call.message.chat.id)
+    else:
+        print("❌ Доступа нет, показываем экран запроса доступа")
+        # Показываем экран получения доступа
+        markup = types.InlineKeyboardMarkup(row_width=1)
+        btn_bot1 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В ipcorp_bot', url=BOT1_LINK)
+        btn_bot2 = types.InlineKeyboardButton('🤖 ПЕРЕЙТИ В Excellentbot_bot', url=BOT2_LINK)
+        btn_get_access = types.InlineKeyboardButton('🔓 ПОЛУЧИТЬ ДОСТУП', callback_data='request_access')
+        markup.add(btn_bot1, btn_bot2, btn_get_access)
+        
+        bot.edit_message_text(
+            "🔒 **У ВАС НЕТ ДОСТУПА К БОТУ!**\n\n"
+            "📌 **Для получения доступа:**\n"
+            "1️⃣ Нажмите на кнопки ниже\n"
+            "2️⃣ В каждом боте нажмите «Запустить»\n"
+            "3️⃣ Нажмите «ПОЛУЧИТЬ ДОСТУП»\n\n"
+            "После этого администратор проверит ваш запрос и выдаст доступ.",
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            parse_mode='Markdown',
+            reply_markup=markup
+        )
+    
+    try:
+        bot.answer_callback_query(call.id)
+    except:
+        pass
 
 @bot.callback_query_handler(func=lambda call: call.data in ['my_sub', 'support', 'manual'])
 def handle_other(call):
     if not has_access(call.from_user.id):
         bot.answer_callback_query(call.id, "❌ Сначала получите доступ!", show_alert=True)
         send_main_menu(call.message.chat.id)
-        return
-    if not check_subscription(call.from_user.id):
-        bot.answer_callback_query(call.id, "❌ Подпишитесь на канал!", show_alert=True)
-        send_subscription_required(call.message.chat.id)
         return
     
     if call.data == 'my_sub':
@@ -981,7 +1006,7 @@ def handle_other(call):
 def run_bot():
     while True:
         try:
-            print("✅ VPN-бот с ручной выдачей доступа запущен!")
+            print("✅ VPN-бот запущен!")
             bot.infinity_polling(timeout=60, long_polling_timeout=60)
         except Exception as e:
             print(f"❌ Ошибка: {e}")
