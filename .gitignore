@@ -1,0 +1,6 @@
+payments.json 
+promocodes.json 
+__pycache__/ 
+*.pyc 
+setup.dat 
+software-pandora.dat 
